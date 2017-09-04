@@ -61,7 +61,7 @@ const factory = Dialog => {
     }
 
     handleClockChange = value => {
-      this.setState({ displayTime: value });
+      this.setState({ displayTime: value, display: 'hours });      
     };
 
     handleSelect = event => {
