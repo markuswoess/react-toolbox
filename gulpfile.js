@@ -3,22 +3,23 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const postcss = require('gulp-postcss');
 
-gulp.task('js', function () {
-  return gulp.src([
-    './components/**/*.js',
-    '!./components/**/*.spec.js',
-    '!./components/**/__test__',
-    '!./components/__mocks__/**/*.js'
-  ])
+gulp.task('js', function() {
+  return gulp
+    .src([
+      './src/components/**/*.js',
+      '!./src/components/**/__test__/*.js',
+      '!./src/components/**/*.spec.js',
+      '!./src/components/__mocks__/**/*.js',
+    ])
     .pipe(babel())
     .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('css', function () {
+gulp.task('css', function() {
   const plugins = [
     require('postcss-import')({
       root: __dirname,
-      path: [path.join(__dirname, './components')]
+      path: [path.join(__dirname, './src')],
     }),
     require('postcss-mixins')(),
     require('postcss-each')(),
@@ -27,16 +28,14 @@ gulp.task('css', function () {
     require('postcss-reporter')({ clearMessages: true })
   ];
 
-  return gulp.src([
-      './components/*.css',
-      './components/**/*.css'
-    ])
+  return gulp
+    .src(['./src/components/*.css', './src/components/**/*.css'])
     .pipe(postcss(plugins))
     .pipe(gulp.dest('./lib'));
 });
 
 gulp.task('tsd', function () {
-  gulp.src('./components/**/*.d.ts')
+  gulp.src('./src/components/**/*.d.ts')
     .pipe(gulp.dest('./lib'));
 });
 
