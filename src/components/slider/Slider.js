@@ -262,7 +262,7 @@ const factory = (ProgressBar, Input) => {
       if (!this.props.editable) return undefined;
       return (
         <Input
-          className={this.props.theme.input}
+          className={this.props.theme.Input}          
           disabled={this.props.disabled}
           innerRef={node => {
             this.inputNode = node;
